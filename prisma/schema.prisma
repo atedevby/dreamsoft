@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         UserRole @default(MANAGER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+}
+
+model Product {
+  id             String                  @id @default(cuid())
+  title          String
+  slug           String                  @unique
+  sku            String?                 @unique
+  description    String?
+  price          Decimal                 @db.Decimal(10, 2)
+  currency       String                  @default("BYN")
+  stockQty       Int                     @default(0)
+  isPublished    Boolean                 @default(false)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+  categoryId     String?
+  category       Category?               @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images         ProductImage[]
+  specs          ProductSpec[]
+  recommendations ProductRecommendation[] @relation("SourceProduct")
+  recommendedBy  ProductRecommendation[] @relation("RecommendedProduct")
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String?
+  position  Int      @default(0)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model ProductSpec {
+  id        String   @id @default(cuid())
+  name      String
+  value     String
+  position  Int      @default(0)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model ProductRecommendation {
+  id                 String   @id @default(cuid())
+  sourceProductId    String
+  recommendedProductId String
+  position           Int      @default(0)
+  createdAt          DateTime @default(now())
+  sourceProduct      Product  @relation("SourceProduct", fields: [sourceProductId], references: [id], onDelete: Cascade)
+  recommendedProduct Product  @relation("RecommendedProduct", fields: [recommendedProductId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceProductId, recommendedProductId])
+}
+
+model SiteSettings {
+  id               String   @id @default(cuid())
+  siteName         String
+  phone            String?
+  email            String?
+  address          String?
+  logoUrl          String?
+  copyright        String?
+  telegramUrl      String?
+  whatsappUrl      String?
+  instagramUrl     String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model MenuItem {
+  id        String   @id @default(cuid())
+  label     String
+  href      String
+  position  Int      @default(0)
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FooterLink {
+  id        String   @id @default(cuid())
+  section   String
+  label     String
+  href      String
+  position  Int      @default(0)
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
