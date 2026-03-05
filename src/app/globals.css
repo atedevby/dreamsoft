@@ -4,8 +4,8 @@
   --card: #ffffff;
   --border: #e7ded5;
   --muted: #75685e;
-  --primary: #a36c48;
-  --primary-dark: #875737;
+  --primary: #052830;
+  --primary-dark: #031f25;
   --accent: #f8f1ea;
 }
 
@@ -74,11 +74,87 @@ a {
   letter-spacing: 0.02em;
 }
 
-.nav {
+.headerNavDesktop {
   display: flex;
   align-items: center;
   gap: 1rem;
   color: var(--muted);
+}
+
+.menuToggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menuToggle span {
+  width: 16px;
+  height: 2px;
+  background: var(--foreground);
+  border-radius: 2px;
+}
+
+.mobileMenuLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+}
+
+.mobileMenuBackdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(18, 12, 8, 0.42);
+}
+
+.mobileMenuPanel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: min(86vw, 340px);
+  background: #fff;
+  border-left: 1px solid var(--border);
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.mobileMenuTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileMenuClose {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.mobileMenuLinks {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.mobileMenuLinks a {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  background: #fff;
 }
 
 .stack {
@@ -730,9 +806,12 @@ a {
     min-height: 62px;
   }
 
-  .nav {
-    gap: 0.6rem;
-    font-size: 0.9rem;
+  .headerNavDesktop {
+    display: none;
+  }
+
+  .menuToggle {
+    display: inline-flex;
   }
 
   .heroGlass {

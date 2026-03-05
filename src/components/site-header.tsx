@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CartLink } from "@/components/cart-link";
+import { HeaderNav } from "@/components/header-nav";
 import { getHeaderItems, getSiteSettings } from "@/lib/site-data";
 
 export async function SiteHeader() {
@@ -11,14 +11,7 @@ export async function SiteHeader() {
         <Link href="/" className="brand">
           {settings.siteName}
         </Link>
-        <nav className="nav">
-          {menu.map((item) => (
-            <Link key={`${item.label}-${item.href}`} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-          <CartLink />
-        </nav>
+        <HeaderNav items={menu} />
       </div>
     </header>
   );
