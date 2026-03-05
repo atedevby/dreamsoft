@@ -125,7 +125,7 @@ a {
 .mobileMenuLayer {
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 1200;
 }
 
 .mobileMenuBackdrop {
@@ -137,15 +137,16 @@ a {
 
 .mobileMenuPanel {
   position: fixed;
-  right: 0;
-  top: 0;
-  height: 100%;
+  inset: 0 0 0 auto;
+  height: 100dvh;
+  max-height: 100dvh;
   width: min(86vw, 340px);
   background: #052830;
   color: #e8f1f3;
   border-left: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 1rem;
+  padding: calc(1rem + env(safe-area-inset-top)) 1rem calc(1rem + env(safe-area-inset-bottom));
   display: grid;
+  grid-template-rows: auto 1fr;
   gap: 1rem;
   box-shadow: -10px 0 30px rgba(3, 18, 22, 0.32);
   overflow-y: auto;
@@ -155,6 +156,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #052830;
+  padding-bottom: 0.35rem;
 }
 
 .mobileMenuTop p {
@@ -177,6 +183,7 @@ a {
 .mobileMenuLinks {
   display: grid;
   gap: 0.7rem;
+  align-content: start;
 }
 
 .mobileMenuLinks a {
@@ -362,6 +369,9 @@ a {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(6, 37, 44, 0.09);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: grid;
+  grid-template-rows: 210px 1fr auto;
+  height: 100%;
 }
 
 .productCard:hover {
@@ -374,7 +384,8 @@ a {
 }
 
 .productImage {
-  min-height: 210px;
+  min-height: 0;
+  height: 100%;
   background-color: #ebe2d8;
   background-size: cover;
   background-position: center;
@@ -384,11 +395,19 @@ a {
   padding: 1rem 1rem 0.7rem;
   display: grid;
   gap: 0.4rem;
+  align-content: start;
+  min-height: 130px;
 }
 
 .productMeta {
   color: var(--muted);
   font-size: 0.86rem;
+  min-height: 1.1rem;
+}
+
+.productBody h3 {
+  line-height: 1.3;
+  min-height: 2.6em;
 }
 
 .productActions {
@@ -882,7 +901,7 @@ a {
 
   .mobileMenuPanel {
     width: min(90vw, 320px);
-    padding: 0.8rem;
+    padding: calc(0.8rem + env(safe-area-inset-top)) 0.8rem calc(0.8rem + env(safe-area-inset-bottom));
     gap: 0.7rem;
   }
 
