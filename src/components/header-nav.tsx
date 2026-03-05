@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartLink } from "@/components/cart-link";
 
 type HeaderItem = {
@@ -13,6 +13,13 @@ export function HeaderNav({ items }: { items: HeaderItem[] }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = () => setIsOpen(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -47,7 +54,7 @@ export function HeaderNav({ items }: { items: HeaderItem[] }) {
           />
           <aside className="mobileMenuPanel">
             <div className="mobileMenuTop">
-              <p>Меню</p>
+              <p>Навигация</p>
               <button
                 type="button"
                 className="mobileMenuClose"

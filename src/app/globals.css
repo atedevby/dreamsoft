@@ -1,12 +1,12 @@
 :root {
-  --background: #f5f2ee;
-  --foreground: #1d1916;
+  --background: #f3f5f6;
+  --foreground: #14181b;
   --card: #ffffff;
-  --border: #e7ded5;
-  --muted: #75685e;
+  --border: #dce4e8;
+  --muted: #5b6a72;
   --primary: #052830;
   --primary-dark: #031f25;
-  --accent: #f8f1ea;
+  --accent: #eaf1f3;
 }
 
 html,
@@ -16,7 +16,10 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background:
+    radial-gradient(circle at 10% -20%, #dce9ee 0, transparent 36%),
+    radial-gradient(circle at 110% -10%, #dce9ee 0, transparent 34%),
+    var(--background);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -52,12 +55,13 @@ a {
 }
 
 .siteHeader {
-  background: rgba(255, 255, 255, 0.9);
-  border-bottom: 1px solid var(--border);
+  background: rgba(5, 40, 48, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   position: sticky;
   top: 0;
-  z-index: 10;
-  backdrop-filter: blur(8px);
+  z-index: 40;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px rgba(6, 26, 31, 0.2);
 }
 
 .rowBetween {
@@ -72,21 +76,37 @@ a {
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  color: #f2f8f9;
 }
 
 .headerNavDesktop {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  color: var(--muted);
+  gap: 0.55rem;
+  color: #d3e2e6;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 0.3rem;
+}
+
+.headerNavDesktop a {
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.headerNavDesktop a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
 }
 
 .menuToggle {
   display: none;
   width: 42px;
   height: 42px;
-  border: 1px solid var(--border);
-  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   align-items: center;
   justify-content: center;
@@ -98,7 +118,7 @@ a {
 .menuToggle span {
   width: 16px;
   height: 2px;
-  background: var(--foreground);
+  background: #f2f8f9;
   border-radius: 2px;
 }
 
@@ -109,23 +129,25 @@ a {
 }
 
 .mobileMenuBackdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
   border: none;
-  background: rgba(18, 12, 8, 0.42);
+  background: rgba(6, 20, 24, 0.55);
 }
 
 .mobileMenuPanel {
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   height: 100%;
   width: min(86vw, 340px);
-  background: #fff;
-  border-left: 1px solid var(--border);
+  background: linear-gradient(180deg, #052830 0%, #073743 100%);
+  color: #e8f1f3;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
   padding: 1rem;
   display: grid;
   gap: 1rem;
+  box-shadow: -10px 0 30px rgba(3, 18, 22, 0.32);
 }
 
 .mobileMenuTop {
@@ -137,9 +159,10 @@ a {
 .mobileMenuClose {
   width: 36px;
   height: 36px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   cursor: pointer;
   font-size: 1.4rem;
   line-height: 1;
@@ -151,10 +174,18 @@ a {
 }
 
 .mobileMenuLinks a {
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   padding: 0.7rem 0.8rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mobileMenuLinks .cartLink {
+  width: 100%;
+  justify-content: space-between;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.1);
+  color: #e8f1f3;
 }
 
 .stack {
@@ -254,8 +285,8 @@ a {
   align-items: end;
   background-image: linear-gradient(
       120deg,
-      rgba(31, 24, 20, 0.58),
-      rgba(31, 24, 20, 0.32)
+      rgba(4, 21, 27, 0.72),
+      rgba(4, 21, 27, 0.48)
     ),
     url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1600&auto=format&fit=crop");
   background-size: cover;
@@ -266,11 +297,13 @@ a {
   padding: 2rem;
   display: grid;
   gap: 0.9rem;
-  background: linear-gradient(
-    180deg,
-    rgba(253, 245, 237, 0.2),
-    rgba(253, 245, 237, 0.88)
-  );
+  background: linear-gradient(180deg, rgba(242, 249, 250, 0.12), rgba(242, 249, 250, 0.9));
+}
+
+.heroGlass h1,
+.heroGlass p,
+.heroGlass .eyebrow {
+  color: #072932;
 }
 
 .heroGlass h1 {
@@ -320,13 +353,13 @@ a {
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(25, 18, 12, 0.06);
+  box-shadow: 0 10px 30px rgba(6, 37, 44, 0.09);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .productCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 30px rgba(25, 18, 12, 0.12);
+  box-shadow: 0 20px 36px rgba(6, 37, 44, 0.16);
 }
 
 .productImageWrap {
@@ -360,12 +393,18 @@ a {
 
 .cartLink {
   border: 1px solid var(--border);
-  background: #fff;
+  background: #ffffff;
   padding: 0.4rem 0.7rem;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+}
+
+.headerNavDesktop .cartLink {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: #e6f1f3;
 }
 
 .cartBadge {
@@ -749,9 +788,29 @@ a {
 }
 
 .siteFooter {
-  background: #ffffff;
-  border-top: 1px solid var(--border);
+  background: #052830;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   margin-top: 2rem;
+  color: #d2e1e4;
+}
+
+.brandLuxury {
+  background: linear-gradient(145deg, #052830 0%, #0a3a45 100%);
+  border-radius: 20px;
+  padding: 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.brandLuxury h2 {
+  color: #f4fbfc;
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+}
+
+.brandLuxury p {
+  color: #c3d7dc;
+  max-width: 760px;
 }
 
 .footerGrid {
@@ -769,17 +828,17 @@ a {
   list-style: none;
   display: grid;
   gap: 0.45rem;
-  color: var(--muted);
+  color: #b2c7ce;
 }
 
 .footerBottom {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  color: var(--muted);
+  color: #adc2c9;
   font-size: 0.92rem;
 }
 

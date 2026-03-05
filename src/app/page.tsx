@@ -53,6 +53,15 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      <section className="brandLuxury">
+        <p className="eyebrow">DreamSoft Signature</p>
+        <h2>Премиальный сервис: от подбора до доставки и сборки</h2>
+        <p>
+          Сопровождаем проект интерьера персонально: консультация дизайнера, подбор
+          материалов, контроль качества и бережная доставка по Беларуси.
+        </p>
+      </section>
     </div>
   );
 }
